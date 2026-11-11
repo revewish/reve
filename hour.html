@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>ساعة الصفر — Revè</title>
+<link href="https://fonts.googleapis.com/css2?family=Aref+Ruqaa:wght@700&family=Cairo:wght@400;700;900&display=swap" rel="stylesheet">
+<style>
+:root{--blood:#8a0303;--blood2:#c1121f;--deep:#2b0000;--bg:#050000;--txt:#e8d5d5;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+*{box-sizing:border-box;margin:0}
+html,body{min-height:100%;background:var(--bg);color:var(--txt);font-family:'Cairo',Tahoma,sans-serif;overflow-x:hidden}
+body{background:radial-gradient(ellipse at 50% 30%,#1a0000 0%,#050000 70%);min-height:100vh;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:70px 16px 40px;text-align:center;position:relative}
+body::after{content:"";position:fixed;inset:0;pointer-events:none;box-shadow:inset 0 0 160px 40px #000;animation:breathe 4s ease-in-out infinite}
+@keyframes breathe{50%{box-shadow:inset 0 0 220px 70px #200000}}
+.drips{position:fixed;top:0;left:0;right:0;height:0;z-index:5;pointer-events:none}
+.drip{position:absolute;top:0;width:8px;background:linear-gradient(#5c0000,var(--blood2));border-radius:0 0 8px 8px;animation:drip linear infinite}
+.drip::after{content:"";position:absolute;bottom:-6px;left:-2px;width:12px;height:12px;border-radius:50%;background:var(--blood2)}
+@keyframes drip{0%{height:0;opacity:1}70%{height:var(--h);opacity:1}100%{height:calc(var(--h) + 30px);opacity:0}}
+h1{font-family:'Aref Ruqaa',serif;font-size:clamp(3rem,15vw,7rem);color:var(--blood2);text-shadow:0 0 18px #6a0000,0 6px 0 #2b0000,0 14px 30px #000;animation:flicker 5s infinite;line-height:1.2}
+@keyframes flicker{0%,92%,100%{opacity:1}93%{opacity:.4}95%{opacity:1}97%{opacity:.6}}
+.sub{font-size:clamp(1.1rem,5vw,1.8rem);font-weight:900;letter-spacing:.1em;color:#7d1a1a;margin:4px 0 22px}
+.miss{font-family:'Aref Ruqaa',serif;font-size:clamp(1.6rem,7vw,2.6rem);color:#d9a0a0;text-shadow:0 0 12px var(--blood);margin-bottom:6px}
+.miss span{color:var(--blood2)}
+.status{font-size:.95rem;color:#a05555;margin-bottom:22px;min-height:1.4em}
+.clock{direction:ltr;display:flex;gap:10px;justify-content:center;align-items:stretch;flex-wrap:nowrap}
+.unit{display:flex;flex-direction:column;align-items:center}
+.box{position:relative;overflow:hidden;min-width:clamp(78px,24vw,150px);padding:14px 6px;background:linear-gradient(#150000,#0a0000);border:1px solid #4a0000;border-radius:10px;font-family:'Cairo',monospace;font-weight:900;font-size:clamp(2.6rem,13vw,5.6rem);line-height:1;color:var(--blood2);box-shadow:0 0 20px #3a000088,inset 0 -14px 24px #2b0000}
+.box::after{content:"";position:absolute;left:0;right:0;bottom:0;height:0;background:linear-gradient(transparent,#7a0000);opacity:.8}
+.lbl{margin-top:8px;font-size:.9rem;color:#8a4040;letter-spacing:.2em}
+.sep{align-self:center;font-size:2.4rem;color:#4a0000;animation:blink 1s steps(2) infinite;padding-bottom:26px}
+@keyframes blink{50%{opacity:.1}}
+.hit-s{animation:hs .9s ease-out}
+.hit-s::after{animation:fill .9s ease-out}
+@keyframes hs{0%{transform:translate(0,0) scale(1.07);color:#fff;text-shadow:0 0 30px #f00}15%{transform:translate(-3px,2px) scale(1.05);color:#ff2a2a}30%{transform:translate(3px,-2px)}50%{transform:translate(-2px,1px);color:var(--blood2)}100%{transform:none;text-shadow:none}}
+@keyframes fill{0%{height:70%}100%{height:0}}
+.hit-m{animation:hm 1.8s ease-out}
+.hit-m::after{animation:fill 1.8s ease-out}
+@keyframes hm{0%{transform:scale(1.14) rotate(-2deg);background:#5a0000;box-shadow:0 0 70px #f00}25%{transform:scale(1.08) rotate(2deg)}50%{transform:scale(1.04) rotate(-1deg)}100%{transform:none}}
+.hit-h{animation:hh 2.6s ease-out}
+.hit-h::after{animation:fill 2.6s ease-out;height:100%}
+@keyframes hh{0%{transform:scale(1.2);background:#8a0303;box-shadow:0 0 120px #f00,0 0 40px #f00 inset}100%{transform:none}}
+.bar{width:min(560px,92vw);height:10px;background:#140000;border:1px solid #3a0000;border-radius:6px;margin:30px auto 8px;overflow:hidden}
+.bar i{display:block;height:100%;width:0;background:linear-gradient(90deg,#4a0000,var(--blood2));box-shadow:0 0 14px var(--blood2);transition:width 1s linear}
+.barlbl{font-size:.8rem;color:#7a3a3a;direction:ltr}
+.memo{margin-top:34px;font-family:'Aref Ruqaa',serif;font-size:clamp(1.4rem,6vw,2.2rem);color:#c98a8a;text-shadow:0 0 14px var(--blood)}
+.memo b{color:var(--blood2);font-size:1.25em}
+.splat{position:fixed;width:14px;height:14px;border-radius:50% 50% 50% 50%/60% 60% 40% 40%;background:var(--blood2);pointer-events:none;z-index:4;animation:fall 1.6s ease-in forwards}
+@keyframes fall{0%{transform:translateY(0) scale(1);opacity:.9}100%{transform:translateY(160px) scale(.4);opacity:0}}
+.msg{position:fixed;top:calc(env(safe-area-inset-top,0px) + 10px);left:50%;transform:translate(-50%,-160%);z-index:20;width:min(420px,92vw);background:#0b0000;border:1px solid var(--blood);border-radius:12px;padding:12px 16px;text-align:left;direction:ltr;box-shadow:0 0 30px #8a0303aa;transition:transform .6s cubic-bezier(.2,1.4,.4,1)}
+.msg.show{transform:translate(-50%,0);animation:shk .5s .6s}
+@keyframes shk{25%{margin-left:-6px}50%{margin-left:6px}75%{margin-left:-3px}}
+.msg small{color:#a03030;letter-spacing:.15em;font-size:.72rem;display:block}
+.msg strong{display:block;font-size:1.05rem;color:#ff3b3b;margin-top:3px}
+.msg em{font-style:normal;color:#666;font-size:.7rem;float:right}
+body.zero h1{animation:none;color:#f00}
+body.zero{animation:bg 1s infinite}
+@keyframes bg{50%{background:#2a0000}}
+</style>
+</head>
+<body>
+<div class="drips" id="drips"></div>
+<div class="msg" id="msg"><small>UNKNOWN <em>الآن</em></small><strong>End of Revè?</strong></div>
+
+<h1>ساعة الصفر</h1>
+<div class="sub">مفيهاش رجوع</div>
+<div class="miss">هتوحشوني<span> …</span> مش كلكو!</div>
+<div class="status" id="status"></div>
+
+<div class="clock">
+  <div class="unit"><div class="box" id="h">00</div><div class="lbl">HOURS</div></div>
+  <div class="sep">:</div>
+  <div class="unit"><div class="box" id="m">00</div><div class="lbl">MINUTES</div></div>
+  <div class="sep">:</div>
+  <div class="unit"><div class="box" id="s">00</div><div class="lbl">SECONDS</div></div>
+</div>
+
+<div class="bar"><i id="bar"></i></div>
+<div class="barlbl">11:00 AM ─────────── 02:00 PM · 11 NOV 2026</div>
+
+<div class="memo"><b>Revè</b> ذكرى<br>والذكرى تُخلَّد</div>
+
+<script>
+(function(){
+var START=new Date('2026-11-11T11:00:00+02:00').getTime();
+var END=new Date('2026-11-11T14:00:00+02:00').getTime();
+var $=function(i){return document.getElementById(i)};
+var H=$('h'),M=$('m'),S=$('s'),bar=$('bar'),st=$('status'),msg=$('msg');
+var last={h:null,m:null,s:null};
+
+// drips
+var dr=$('drips');
+for(var i=0;i<22;i++){var d=document.createElement('div');d.className='drip';
+d.style.left=(Math.random()*98)+'%';d.style.setProperty('--h',(40+Math.random()*140)+'px');
+d.style.animationDuration=(5+Math.random()*7)+'s';d.style.animationDelay=(Math.random()*8)+'s';dr.appendChild(d)}
+
+function pad(n){return n<10?'0'+n:''+n}
+function hit(el,c){el.classList.remove('hit-s','hit-m','hit-h');void el.offsetWidth;el.classList.add(c)}
+function splat(el){var r=el.getBoundingClientRect();var p=document.createElement('div');p.className='splat';
+p.style.left=(r.left+Math.random()*r.width)+'px';p.style.top=(r.bottom-6)+'px';document.body.appendChild(p);
+setTimeout(function(){p.remove()},1700)}
+var hideT;
+function showMsg(){msg.classList.remove('show');void msg.offsetWidth;msg.classList.add('show');
+clearTimeout(hideT);hideT=setTimeout(function(){msg.classList.remove('show')},6000)}
+
+function tick(){
+var now=Date.now(),left=END-now;
+if(left<=0){document.body.classList.add('zero');H.textContent=M.textContent=S.textContent='00';
+st.textContent='ساعة الصفر جت… مفيش رجوع';bar.style.width='100%';return}
+var h=Math.floor(left/3600000),m=Math.floor(left%3600000/60000),s=Math.floor(left%60000/1000);
+if(now<START){st.textContent='لسه مبدأتش… بس الوقت بيجري'}
+else{st.textContent='العد شغال… كل ثانية بتاخد حاجة'}
+var pr=Math.min(100,Math.max(0,(now-START)/(END-START)*100));bar.style.width=pr+'%';
+if(h!==last.h){H.textContent=pad(h);if(last.h!==null)hit(H,'hit-h')}
+if(m!==last.m){M.textContent=pad(m);if(last.m!==null){hit(M,'hit-m');showMsg()}}
+if(s!==last.s){S.textContent=pad(s);hit(S,'hit-s');splat(S)}
+last.h=h;last.m=m;last.s=s}
+tick();setInterval(tick,250);
+setTimeout(showMsg,2500);
+})();
+</script>
+</body>
+</html>
